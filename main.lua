@@ -1,6 +1,7 @@
 game = {}
 
 debugGraph = require( "debugGraph" )
+Camera = require( "hump.camera" )
 
 game.color = require( "color" )
 local color = game.color
@@ -21,10 +22,6 @@ local moving = game.moving
 
 local xCoord = 0
 local yCoord = 0
-local originX
-local originY
-local roundXCoord = math.ceil( xCoord - 0.5 )
-local roundYCoord = math.ceil( yCoord - 0.5 )
 
 local function tableRandom( initTbl )
   local randTbl = {}
@@ -65,10 +62,10 @@ function game.removeBlock( xCoord, yCoord )
 end
 
 local function drawBlock( blockXCoord, blockYCoord, color, mode )
-    local xPos = ( winX / 2 ) + ( blockXCoord * blockSize ) - ( xCoord * blockSize )
-    local yPos = ( winY / 2 ) - ( blockYCoord * blockSize ) + ( yCoord * blockSize )
+    local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )
+    local yPos = ( blockYCoord * blockSize ) - math.floor( blockSize / 2 )
     love.graphics.setColor( color.r, color.g, color.b )
-    love.graphics.rectangle( mode, xPos - blockSize / 2, yPos - blockSize / 2, blockSize, blockSize )
+    love.graphics.rectangle( mode, xPos, yPos, blockSize, blockSize )
 end
 
 local function randomGen( size )
@@ -92,26 +89,11 @@ function love.load()
   
   love.graphics.setBackgroundColor( bgColor.r, bgColor.g, bgColor.b )
   
+  camera = Camera( 0, 0 )
+  
+  game.createBlock( 0, 0 )
+  
   fpsGraph = debugGraph:new('fps', 0, 0, 50, 50, 0.5, "FPS", love.graphics.newFont(12) )
-end
-
-function love.draw()
-  for xCoord, row in pairs( blocks ) do
-    for yCoord, block in pairs( row ) do
-      drawBlock( xCoord, yCoord, block.color, "fill" )
-    end
-  end
-
-  drawBlock( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 }, "line" )
-  
-  love.graphics.setColor( 0, 70, 255 )
-  love.graphics.circle( "fill", winX / 2, winY / 2, 50, 48 )
-  
-  love.graphics.setColor( 255, 255, 255 )
-  love.graphics.print( xCoord .. ", " .. yCoord , 10, 50 )
-  love.graphics.print( game.mouseXCoord .. ", " .. game.mouseYCoord , 10, 60 )
-  
-  fpsGraph:draw()
 end
 
 function love.update( dt )
@@ -121,9 +103,9 @@ function love.update( dt )
   if moving.up and moving.down then
     
   elseif moving.up then
-    yCoord = yCoord + distance
-  elseif moving.down then
     yCoord = yCoord - distance
+  elseif moving.down then
+    yCoord = yCoord + distance
   end
   
   if moving.right and moving.left then
@@ -134,10 +116,32 @@ function love.update( dt )
     xCoord = xCoord - distance
   end
   
-  originX = xCoord - winX / 2
-  originY = yCoord + winY / 2
+  camera:lookAt( xCoord * blockSize, yCoord * blockSize )
+  
   game.mouseXCoord = xCoord - ( ( winX / 2 ) - love.mouse.getX() ) / blockSize
   game.mouseYCoord = yCoord + ( ( winY / 2 ) - love.mouse.getY() ) / blockSize
   
   fpsGraph:update(dt)
+end
+
+function love.draw()
+
+  drawBlock( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 }, "line" )
+  
+  camera:attach()
+  for xCoord, row in pairs( blocks ) do
+    for yCoord, block in pairs( row ) do
+      drawBlock( xCoord, yCoord, block.color, "fill" )
+    end
+  end
+  
+  love.graphics.setColor( 0, 70, 255 )
+  love.graphics.circle( "fill", xCoord * blockSize, yCoord * blockSize, 50, 48 )
+  camera:detach()
+  
+  love.graphics.setColor( 255, 255, 255 )
+  love.graphics.print( xCoord .. ", " .. yCoord , 10, 50 )
+  love.graphics.print( game.mouseXCoord .. ", " .. game.mouseYCoord , 10, 60 )
+  
+  fpsGraph:draw()
 end
