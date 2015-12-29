@@ -90,8 +90,6 @@ function love.load()
   
   camera = Camera( 0, 0 )
   
-  game.createBlock( 0, 0 )
-  
   fpsGraph = debugGraph:new('fps', 0, 0, 50, 50, 0.5, "FPS", love.graphics.newFont(12) )
 end
 
