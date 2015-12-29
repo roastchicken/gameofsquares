@@ -118,15 +118,15 @@ function love.update( dt )
   
   camera:lookAt( xCoord * blockSize, yCoord * blockSize )
   
-  game.mouseXCoord = xCoord - ( ( winX / 2 ) - love.mouse.getX() ) / blockSize
-  game.mouseYCoord = yCoord + ( ( winY / 2 ) - love.mouse.getY() ) / blockSize
+  game.mouseXCoord, game.mouseYCoord = camera:mousePosition()
+  
+  game.mouseXCoord = game.mouseXCoord / blockSize
+  game.mouseYCoord = game.mouseYCoord / blockSize
   
   fpsGraph:update(dt)
 end
 
 function love.draw()
-
-  drawBlock( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 }, "line" )
   
   camera:attach()
   for xCoord, row in pairs( blocks ) do
@@ -134,6 +134,8 @@ function love.draw()
       drawBlock( xCoord, yCoord, block.color, "fill" )
     end
   end
+  
+  drawBlock( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 }, "line" )
   
   love.graphics.setColor( 0, 70, 255 )
   love.graphics.circle( "fill", xCoord * blockSize, yCoord * blockSize, 50, 48 )
