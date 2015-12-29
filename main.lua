@@ -85,7 +85,7 @@ end
 
 function love.load()
   love.window.setMode( winX, winY )
-  love.window.setTitle( "Cube Test" )
+  love.window.setTitle( "Game of Squares" )
   
   love.graphics.setBackgroundColor( bgColor.r, bgColor.g, bgColor.b )
   
