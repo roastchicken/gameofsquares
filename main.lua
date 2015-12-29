@@ -7,14 +7,15 @@ game.color = require( "color" )
 local color = game.color
 local Color = color.new
 
+game.config = require( "config" )
+local config = game.config
+local blockSize = config.constant.blockSize
+
 require( "input" )
 
 local bgColor = { r = 14, g = 156, b = 14 }
 local winX = 1280
 local winY = 720
-
-local stepSize = 3
-local blockSize = 25
 
 local blocks = {}
 game.moving = { up, down, left, right, sprinting }
@@ -94,8 +95,8 @@ function love.load()
 end
 
 function love.update( dt )
-  local distance = stepSize * dt
-  if moving.sprinting then distance = stepSize * 2 * dt end
+  local distance = config.constant.stepSize * dt
+  if moving.sprinting then distance = config.constant.stepSize * 2 * dt end
   
   if moving.up and moving.down then
     
