@@ -1,6 +1,6 @@
 local config = {}
 
-config.constants =
+config.constant =
 {
   blockSize = 25
   stepSize = 3
