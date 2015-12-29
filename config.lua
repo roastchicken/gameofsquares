@@ -11,3 +11,5 @@ config.window =
   xSize = 1280
   ySize = 720
 }
+
+return config
