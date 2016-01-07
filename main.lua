@@ -11,6 +11,8 @@ game.config = require( "config" )
 local config = game.config
 local blockSize = config.constant.blockSize
 
+require( "block" )
+
 require( "input" )
 
 local bgColor = { r = 14, g = 156, b = 14 }
