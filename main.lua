@@ -13,6 +13,8 @@ local blockSize = config.constant.blockSize
 
 game.block = require( "block" )
 
+game.curBlockType = game.block.type.stone
+
 require( "input" )
 
 local bgColor = { r = 14, g = 156, b = 14 }
@@ -43,15 +45,13 @@ local function findBlock( xCoord, yCoord )
   return false
 end
 
-function game.createBlock( xCoord, yCoord, color )
-  local block = {}
+function game.createBlock( xCoord, yCoord, type )
   xCoord = math.floor( xCoord + 0.5 )
   yCoord = math.floor( yCoord + 0.5 )
-  block.color = color or { r = 0, g = 0, b = 0 }
   if not blocks[xCoord] then
     blocks[xCoord] = {}
   end
-  blocks[xCoord][yCoord] = block
+  blocks[xCoord][yCoord] = { color = type.color }
 end
 
 function game.removeBlock( xCoord, yCoord )
