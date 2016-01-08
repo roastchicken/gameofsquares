@@ -11,7 +11,7 @@ game.config = require( "config" )
 local config = game.config
 local blockSize = config.constant.blockSize
 
-require( "block" )
+game.block = require( "block" )
 
 require( "input" )
 
