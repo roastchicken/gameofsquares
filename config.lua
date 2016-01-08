@@ -12,4 +12,6 @@ config.window =
   ySize = 720
 }
 
+config.hotBar = { "stone", "log", "planks", "none", "none", "none", "none", "none", "none", "none" }
+
 return config

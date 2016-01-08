@@ -1,24 +1,22 @@
-local blocks = game.color.blocks
-
 local function selectSlot( slotNum )
   print( "Selected slot #" .. tostring( slotNum ) )
-  local loc = slotNum + 1
-  local colorName = blocks.order[ loc ]
-  if colorName then
-    if blocks.colors[ colorName ] then
-      game.color.curColor = blocks.colors[ colorName ]
+  local item = game.config.hotBar[ slotNum ]
+  if item then
+    local block = game.block.type[item] or false
+    if block then
+      game.curBlockType = block
     else
-      game.color.curColor = game.color.new( 0, 0, 0 )
+      game.curBlockType = game.block.type.stone
     end
   else
-    blocks.order[ loc ] = "none"
+    game.config.hotBar[ slotNum ] = "none"
   end
 end
 
 local actions =
 {
   quit = function() love.event.quit() end,
-  placeBlock = function() game.createBlock( game.mouseXCoord, game.mouseYCoord, game.color.curColor ) end,
+  placeBlock = function() game.createBlock( game.mouseXCoord, game.mouseYCoord, game.curBlockType ) end,
   destroyBlock = function() game.removeBlock( game.mouseXCoord, game.mouseYCoord ) end,
   ["+moveUp"] = function() game.moving.up = true end,
   ["-moveUp"] = function() game.moving.up = false end,
