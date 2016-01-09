@@ -24,6 +24,13 @@ block.type =
     id = 3,
     color = Color( 180, 150, 10 ),
     image = nil
+  },
+  ["leaves"] =
+  {
+    name = "Leaves",
+    id = 4,
+    color = Color( 10, 171, 40 ),
+    image = nil
   }
 }
 
