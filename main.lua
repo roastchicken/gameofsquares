@@ -38,6 +38,15 @@ local function tableRandom( initTbl )
   return randTbl[ math.random( #randTbl ) ]
 end
 
+local function loadBlockTypes()
+  for key, blockType in pairs( game.block.type ) do
+    local image = blockType.image
+    game.block.type[key].quad = love.graphics.newQuad( image[1], image[2], blockSize, blockSize, blocksAtlas:getDimensions() )
+  end
+end
+
+loadBlockTypes()
+
 local function findBlock( xCoord, yCoord )
   if blocks[xCoord] then
     if blocks[xCoord][yCoord] then
@@ -53,7 +62,7 @@ function game.createBlock( xCoord, yCoord, type )
   if not blocks[xCoord] then
     blocks[xCoord] = {}
   end
-  blocks[xCoord][yCoord] = { color = type.color }
+  blocks[xCoord][yCoord] = { color = type.color, quad = type.quad }
 end
 
 function game.removeBlock( xCoord, yCoord )
@@ -66,11 +75,15 @@ function game.removeBlock( xCoord, yCoord )
   end
 end
 
-local function drawBlock( blockXCoord, blockYCoord, color, mode )
+local function drawBlock( blockXCoord, blockYCoord, color, mode, quad )
     local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )
     local yPos = ( blockYCoord * blockSize ) - math.floor( blockSize / 2 )
-    love.graphics.setColor( color.r, color.g, color.b )
-    love.graphics.rectangle( mode, xPos, yPos, blockSize, blockSize )
+    if quad then
+      love.graphics.draw( blocksAtlas, quad, xPos, yPos)
+    else
+      love.graphics.setColor( color.r, color.g, color.b )
+      love.graphics.rectangle( mode, xPos, yPos, blockSize, blockSize )
+    end
 end
 
 local function randomGen( size )
@@ -133,7 +146,7 @@ function love.draw()
   camera:attach()
   for xCoord, row in pairs( blocks ) do
     for yCoord, block in pairs( row ) do
-      drawBlock( xCoord, yCoord, block.color, "fill" )
+      drawBlock( xCoord, yCoord, block.color, "fill", block.quad )
     end
   end
   
