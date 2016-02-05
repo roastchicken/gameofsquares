@@ -9,28 +9,28 @@ block.type =
     name = "Stone",
     id = 1,
     color = Color( 204, 204, 204 ),
-    image = nil
+    image = { 0, 0 }
   },
   ["log"] =
   {
     name = "Log",
     id = 2,
     color = Color( 114, 95, 6 ),
-    image = nil
+    image = { 32, 0 }
   },
   ["planks"] =
   {
     name = "Wooden Planks",
     id = 3,
     color = Color( 180, 150, 10 ),
-    image = nil
+    image = { 0, 32 }
   },
   ["leaves"] =
   {
     name = "Leaves",
     id = 4,
     color = Color( 10, 171, 40 ),
-    image = nil
+    image = { 32, 32 }
   }
 }
 
