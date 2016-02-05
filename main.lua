@@ -1,5 +1,7 @@
 game = {}
 
+local blocksAtlas = love.graphics.newImage( "resources/blocks.png" )
+
 debugGraph = require( "debugGraph" )
 Camera = require( "hump.camera" )
 
