@@ -2,7 +2,7 @@ local config = {}
 
 config.constant =
 {
-  blockSize = 25,
+  blockSize = 32,
   stepSize = 3
 }
 
