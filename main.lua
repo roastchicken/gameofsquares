@@ -58,6 +58,7 @@ end
 function game.createBlock( xCoord, yCoord, type )
   xCoord = math.floor( xCoord + 0.5 )
   yCoord = math.floor( yCoord + 0.5 )
+  if findBlock( xCoord, yCoord ) then return end
   if not blocks[xCoord] then
     blocks[xCoord] = {}
   end
