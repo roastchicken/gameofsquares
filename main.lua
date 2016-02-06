@@ -21,8 +21,6 @@ game.curBlockType = game.block.type.stone
 require( "input" )
 
 local bgColor = { r = 14, g = 156, b = 14 }
-local winX = 1280
-local winY = 720
 
 local blocks = {}
 game.moving = { up, down, left, right, sprinting }
@@ -102,7 +100,7 @@ local function randomGen( size )
 end
 
 function love.load()
-  love.window.setMode( winX, winY )
+  love.window.setMode( config.window.xSize, config.window.ySize )
   love.window.setTitle( "Game of Squares" )
   
   love.graphics.setBackgroundColor( bgColor.r, bgColor.g, bgColor.b )
