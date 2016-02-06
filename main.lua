@@ -76,14 +76,14 @@ function game.removeBlock( xCoord, yCoord )
 end
 
 local function drawBlock( blockXCoord, blockYCoord, color, mode, quad )
-    local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )
-    local yPos = ( blockYCoord * blockSize ) - math.floor( blockSize / 2 )
-    if quad then
-      love.graphics.draw( blocksAtlas, quad, xPos, yPos)
-    else
-      love.graphics.setColor( color.r, color.g, color.b )
-      love.graphics.rectangle( mode, xPos, yPos, blockSize, blockSize )
-    end
+  local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )
+  local yPos = ( blockYCoord * blockSize ) - math.floor( blockSize / 2 )
+  if quad then
+    love.graphics.draw( blocksAtlas, quad, xPos, yPos)
+  else
+    love.graphics.setColor( color.r, color.g, color.b )
+    love.graphics.rectangle( mode, xPos, yPos, blockSize, blockSize )
+  end
 end
 
 local function randomGen( size )
