@@ -1,6 +1,7 @@
 game = {}
 
 local blocksAtlas = love.graphics.newImage( "resources/blocks.png" )
+blocksAtlas:setFilter( "nearest", "nearest" )
 
 debugGraph = require( "debugGraph" )
 Camera = require( "hump.camera" )
@@ -41,7 +42,7 @@ end
 local function loadBlockTypes()
   for key, blockType in pairs( game.block.type ) do
     local image = blockType.image
-    game.block.type[key].quad = love.graphics.newQuad( image[1], image[2], blockSize, blockSize, blocksAtlas:getDimensions() )
+    game.block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, 2 * blockSize, 2 * blockSize )
   end
 end
 
