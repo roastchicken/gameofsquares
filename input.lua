@@ -35,8 +35,8 @@ local actions =
 local bindings =
 {
   escape = "quit",
-  mouse1 = "placeBlock",
-  mouse2 = "destroyBlock",
+  mouse1 = "destroyBlock",
+  mouse2 = "placeBlock",
   w = "+moveUp",
   s = "+moveDown",
   a = "+moveLeft",
