@@ -49,7 +49,7 @@ loadBlocksAtlas()
 local function loadBlockTypes()
   for key, blockType in pairs( game.block.type ) do
     local image = blockType.image
-    game.block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, blockSize * blocksAtlasSize.x, blockSize * blocksAtlasSize.u )
+    game.block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, blockSize * blocksAtlasSize.x, blockSize * blocksAtlasSize.y )
   end
 end
 
