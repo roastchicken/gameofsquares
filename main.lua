@@ -159,8 +159,10 @@ function love.draw()
     end
   end
   
+  --draw outline on block that cursor is hovering over
   drawBlock( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 }, "line" )
   
+  --draw the player (50px blue circle)
   love.graphics.setColor( 0, 70, 255 )
   love.graphics.circle( "fill", xCoord * blockSize, yCoord * blockSize, 50, 48 )
   camera:detach()
