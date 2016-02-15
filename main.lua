@@ -84,15 +84,11 @@ function game.removeBlock( xCoord, yCoord )
   end
 end
 
-local function drawBlock( blockXCoord, blockYCoord, color, mode, quad )
+local function drawBlock( blockXCoord, blockYCoord, quad )
   local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )
   local yPos = ( blockYCoord * blockSize ) - math.floor( blockSize / 2 )
-  if quad then
-    love.graphics.draw( blocksAtlas, quad, xPos, yPos)
-  else
-    love.graphics.setColor( color.r, color.g, color.b )
-    love.graphics.rectangle( mode, xPos, yPos, blockSize, blockSize )
-  end
+  
+  love.graphics.draw( blocksAtlas, quad, xPos, yPos)
 end
 
 local function drawBlockOutline( blockXCoord, blockYCoord, color )
@@ -163,7 +159,7 @@ function love.draw()
   camera:attach()
   for xCoord, row in pairs( blocks ) do
     for yCoord, block in pairs( row ) do
-      drawBlock( xCoord, yCoord, block.color, "fill", block.quad )
+      drawBlock( xCoord, yCoord, block.quad )
     end
   end
   
