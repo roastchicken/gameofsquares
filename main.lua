@@ -1,7 +1,7 @@
 game = {}
 
-local blocksAtlas = love.graphics.newImage( "resources/blocks.png" )
-blocksAtlas:setFilter( "nearest", "nearest" )
+local blocksAtlas
+local blocksAtlasSize = { x = 0, y = 0 }
 
 debugGraph = require( "debugGraph" )
 Camera = require( "hump.camera" )
@@ -37,10 +37,19 @@ local function tableRandom( initTbl )
   return randTbl[ math.random( #randTbl ) ]
 end
 
+local function loadBlocksAtlas()
+  blocksAtlas = love.graphics.newImage( "resources/blocks.png" )
+  blocksAtlas:setFilter( "nearest", "nearest" )
+  blocksAtlasSize.x = blocksAtlas:getWidth() / 16
+  blocksAtlasSize.y = blocksAtlas:getHeight() / 16
+end
+
+loadBlocksAtlas()
+
 local function loadBlockTypes()
   for key, blockType in pairs( game.block.type ) do
     local image = blockType.image
-    game.block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, 2 * blockSize, 2 * blockSize )
+    game.block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, blockSize * blocksAtlasSize.x, blockSize * blocksAtlasSize.u )
   end
 end
 
