@@ -95,6 +95,14 @@ local function drawBlock( blockXCoord, blockYCoord, color, mode, quad )
   end
 end
 
+local function drawBlockOutline( blockXCoord, blockYCoord, color )
+  local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )
+  local yPos = ( blockYCoord * blockSize ) - math.floor( blockSize / 2 )
+  
+  love.graphics.setColor( color.r, color.g, color.b )
+  love.graphics.rectangle( "line", xPos, yPos, blockSize, blockSize )
+end
+
 local function randomGen( size )
   local genColors = color.blocks.colors
   genColors.black = nil
@@ -160,7 +168,7 @@ function love.draw()
   end
   
   --draw outline on block that cursor is hovering over
-  drawBlock( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 }, "line" )
+  drawBlockOutline( math.floor( game.mouseXCoord + 0.5 ), math.floor( game.mouseYCoord + 0.5 ), { r = 55, g = 255, b = 255 } )
   
   --draw the player (50px blue circle)
   love.graphics.setColor( 0, 70, 255 )
