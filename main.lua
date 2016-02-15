@@ -71,7 +71,7 @@ function game.createBlock( xCoord, yCoord, type )
   if not blocks[xCoord] then
     blocks[xCoord] = {}
   end
-  blocks[xCoord][yCoord] = { color = type.color, quad = type.quad }
+  blocks[xCoord][yCoord] = { quad = type.quad }
 end
 
 function game.removeBlock( xCoord, yCoord )
