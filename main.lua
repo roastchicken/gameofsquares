@@ -6,10 +6,6 @@ local blocksAtlasSize = { x = 0, y = 0 }
 debugGraph = require( "debugGraph" )
 Camera = require( "hump.camera" )
 
-game.color = require( "color" )
-local color = game.color
-local Color = color.new
-
 game.config = require( "config" )
 local config = game.config
 local blockSize = config.constant.blockSize

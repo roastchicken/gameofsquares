@@ -1,7 +1,5 @@
 local block = {}
 
-local Color = game.color.new
-
 block.type =
 {
   ["stone"] =
