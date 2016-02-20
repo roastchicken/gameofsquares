@@ -11,8 +11,9 @@ local config = game.config
 local blockSize = config.constant.blockSize
 
 game.block = require( "block" )
+local block = game.block
 
-game.curBlockType = game.block.type.stone
+game.curBlockType = block.type.stone
 
 require( "input" )
 
@@ -43,9 +44,9 @@ end
 loadBlocksAtlas()
 
 local function loadBlockTypes()
-  for key, blockType in pairs( game.block.type ) do
+  for key, blockType in pairs( block.type ) do
     local image = blockType.image
-    game.block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, blockSize * blocksAtlasSize.x, blockSize * blocksAtlasSize.y )
+    block.type[key].quad = love.graphics.newQuad( image[1] * blockSize, image[2] * blockSize, blockSize, blockSize, blockSize * blocksAtlasSize.x, blockSize * blocksAtlasSize.y )
   end
 end
 
@@ -100,7 +101,7 @@ local function randomGen( size )
   for x = 0 - ( size / 2 ), size / 2 do
     blocks[x] = {}
     for y = 0 - ( size / 2 ), size / 2 do
-      local type = tableRandom( game.block.type )
+      local type = tableRandom( block.type )
       blocks[x][y] = { quad = type.quad }
     end
   end
