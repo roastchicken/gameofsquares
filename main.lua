@@ -96,15 +96,12 @@ local function drawBlockOutline( blockXCoord, blockYCoord, color )
 end
 
 local function randomGen( size )
-  local genColors = color.blocks.colors
-  genColors.black = nil
   size = size - 1
   for x = 0 - ( size / 2 ), size / 2 do
     blocks[x] = {}
     for y = 0 - ( size / 2 ), size / 2 do
-      local block = {}
-      block.color = tableRandom( genColors )
-      blocks[x][y] = block
+      local type = tableRandom( game.block.type )
+      blocks[x][y] = { quad = type.quad }
     end
   end
 end
