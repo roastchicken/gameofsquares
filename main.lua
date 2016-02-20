@@ -3,6 +3,9 @@ game = {}
 local blocksAtlas
 local blocksAtlasSize = { x = 0, y = 0 }
 
+game.blocks = {}
+local blocks = game.blocks
+
 debugGraph = require( "debugGraph" )
 Camera = require( "hump.camera" )
 
@@ -19,7 +22,6 @@ require( "input" )
 
 local bgColor = { r = 14, g = 156, b = 14 }
 
-local blocks = {}
 game.moving = { up, down, left, right, sprinting }
 local moving = game.moving
 
@@ -51,35 +53,6 @@ local function loadBlockTypes()
 end
 
 loadBlockTypes()
-
-local function findBlock( xCoord, yCoord )
-  if blocks[xCoord] then
-    if blocks[xCoord][yCoord] then
-      return blocks[xCoord][yCoord]
-    end
-  end
-  return false
-end
-
-function game.createBlock( xCoord, yCoord, type )
-  xCoord = math.floor( xCoord + 0.5 )
-  yCoord = math.floor( yCoord + 0.5 )
-  if findBlock( xCoord, yCoord ) then return end
-  if not blocks[xCoord] then
-    blocks[xCoord] = {}
-  end
-  blocks[xCoord][yCoord] = { quad = type.quad }
-end
-
-function game.removeBlock( xCoord, yCoord )
-  xCoord = math.floor( xCoord + 0.5 )
-  yCoord = math.floor( yCoord + 0.5 )
-  if blocks[xCoord] then
-    if blocks[xCoord][yCoord] then
-      blocks[xCoord][yCoord] = nil
-    end
-  end
-end
 
 local function drawBlock( blockXCoord, blockYCoord, quad )
   local xPos = ( blockXCoord * blockSize ) - math.floor( blockSize / 2 )

@@ -16,8 +16,8 @@ end
 local actions =
 {
   quit = function() love.event.quit() end,
-  placeBlock = function() game.createBlock( game.mouseXCoord, game.mouseYCoord, game.curBlockType ) end,
-  destroyBlock = function() game.removeBlock( game.mouseXCoord, game.mouseYCoord ) end,
+  placeBlock = function() game.block.create( game.mouseXCoord, game.mouseYCoord, game.curBlockType ) end,
+  destroyBlock = function() game.block.remove( game.mouseXCoord, game.mouseYCoord ) end,
   ["+moveUp"] = function() game.moving.up = true end,
   ["-moveUp"] = function() game.moving.up = false end,
   ["+moveDown"] = function() game.moving.down = true end,
